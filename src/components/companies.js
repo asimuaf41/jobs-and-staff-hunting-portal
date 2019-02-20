@@ -1,50 +1,113 @@
-import React, { Component } from 'react';
-import { Carousel} from 'react-bootstrap';
-class Company extends Component{
+ import React, { Component } from "react";
+ import Slider from "react-slick";
  
-render(){
-    return(
-        <div className="compnay">
-        <Carousel>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=First slide&bg=373940"
-      alt="First slide"
-    />
-    <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Second slide&bg=282c34"
-      alt="Third slide"
-    />
-
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Third slide&bg=20232a"
-      alt="Third slide"
-    />
-
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-</Carousel>;
-        </div>
-    );
-}
-
-}
-export default  Company;
+ export default class Company  extends Component {
+   render() {
+     var settings = {
+       
+       autoplay: true,
+       autoplaySpeed: 1500,
+       pauseOnHover: true,
+       responsive: [
+        {
+          breakpoint: 1500,
+          settings: {
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true
+          }
+        },
+         {
+           breakpoint: 1024,
+           settings: {
+             slidesToShow: 6,
+             slidesToScroll: 1,
+             infinite: true,
+             dots: true
+           }
+         },
+         {
+           breakpoint: 600,
+           settings: {
+             slidesToShow: 4,
+             slidesToScroll: 1,
+             initialSlide: 2,
+             dots: true
+           }
+         },
+         {
+           breakpoint: 480,
+           settings: {
+             slidesToShow: 2,
+             slidesToScroll: 1,
+             dots: true
+           }
+         }
+       ]
+     };
+     return (
+       <div>
+        
+         <Slider {...settings}>
+           <div>
+           <img
+           className="d-block "
+           src={require('../images/soft.jpg')}
+           alt="First slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block "
+           src={require('../images/sof.jpg')}
+           alt="Third slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block"
+           src={require('../images/haire.jpg')}
+           alt="Third slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block"
+           src={require('../images/abc (1).jpg')}
+           alt="Third slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block"
+           src={require('../images/abc (2).jpg')}
+           alt="Third slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block"
+           src={require('../images/abc (3).jpg')}
+           alt="Third slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block"
+           src={require('../images/abc (4).jpg')}
+           alt="Third slide"
+         />
+           </div>
+           <div>
+           <img
+           className="d-block"
+           src={require('../images/abc (5).jpg')}
+           alt="Third slide"
+         />
+           </div>
+         </Slider>
+       </div>
+     );
+   }
+ }
