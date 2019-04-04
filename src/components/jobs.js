@@ -6,15 +6,120 @@ import $ from 'jquery';
 import { Accordion, AccordionItem } from 'react-light-accordion';
 import 'react-light-accordion/demo/css/index.css'
 import { MDBInput } from 'mdbreact';
-
+import { connect } from "react-redux";
+import {setJobs} from '../actions/userActions';
+import axios from "axios";
 class Jobs extends Component{
-     
+
+     componentDidMount(){
+       
+         fetch('/getAllJobs')
+         .then((res)=>res.json())
+         .then((json)=>{
+        
+             this.props.dispatch(setJobs(json.data))
+             
+            
+         })
+         .catch((error)=>console.log(error));
+     }
     
+
+
     render(){
-        var data="fgdfhbfdg";
+    var data=Array.from(this.props.jobs)
+   let jobs=data.map((job)=>{
+        return <div className="job-post-area" key={job._id}>
+        <div className="post-header">
+        <div className="post-logo">
+        <img
+       className="job-logo"
+       src={require('../images/abc (2).jpg')}
+       alt="Third slide"
+       />
+        </div>
+        <div className="post-title">
+        <p>{job.title}<p><i class="fa fa-clock-o" aria-hidden="true"></i> {job.currentTime}</p></p>
+       
+        </div>
+       
+        </div>
+        <div className="post-content">
+        <div className="company-name">
+         <p><i class="fa fa-institution" aria-hidden="true"></i> company : {job.company}<span className="job-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {job.location}, Pakistan</span></p>
+        </div>
+        <div className="job-detail">
+        {job.jobDetail}
+        </div>
+        <div className="job-features">
+        <p><i class="fa fa-cc-visa" aria-hidden="true"></i> Rs.{job.salary} salary </p>
+        <p><i class="fa fa-mortar-board" aria-hidden="true"></i> {job.experiance}</p>
+        <p><i class="fa fa-flag" aria-hidden="true"></i> {job.totalSeats} total positions</p>  
+        </div>
+        <div className="job-requirement">
+        <p><i class="fa fa-tags" aria-hidden="true"> </i>{" "} </p>
+        <p>  {job.skills}</p>  
+        </div>
+        <div className="post-footer">
+        <p><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 7 likes  </p>
+        <p><i class="fa fa-comments" aria-hidden="true"></i> 5 comments  </p>
+        <p><i class="fa fa-share-alt" aria-hidden="true"></i> 7 shares </p>
+        </div>
+        </div>
+       </div>
+    })
+    var topData=Array.from(this.props.jobs);
+    let topJobs=topData.map((job)=>{
+      if(job.salary > 50000){
+        return  <div className="top-job-post">
+        <div className="post-title">
+         <p>{job.title}<p><i class="fa fa-clock-o" aria-hidden="true"></i>{job.currentTime}</p></p>
+        
+         </div>
+        
+       
+         <div className="post-content">
+         <div className="company-name">
+          <p><i class="fa fa-institution" aria-hidden="true"></i> company : {job.company}<span className="job-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {job.location}, Pakistan</span></p>
+         </div>
+         
+         <div className="job-top-features">
+         <p><i class="fa fa-cc-visa" aria-hidden="true"></i> salary :Rs.{job.salary}</p>
+         <p><i class="fa fa-mortar-board" aria-hidden="true"></i> Experiance: {job.experiance}</p>
+         <p><i class="fa fa-flag" aria-hidden="true"></i> total seats : {job.totalSeats}</p> 
+         <p><i class="fa fa-drivers-license" aria-hidden="true"></i>  age:above 25 years</p> 
+         </div>
+         <div className="job-top-requirement">
+         <p><i class="fa fa-tags" aria-hidden="true"></i> </p>
+         <p>{job.skills}</p>
+         
+         </div>
+         
+         </div>
+        </div>
+      }
+
+    })
         return(
             <div>
-             
+              <div className="search-bar">
+             <div className="search-bar-multi">
+             <input type="text" placeholder="skills..." />
+             </div> 
+             <div className="search-bar-multi">
+             <input type="text" placeholder="city..." />
+             </div>
+             <div className="search-bar-multi">
+             <input type="text" placeholder="Functional Area..." />
+             </div>
+             <div className="search-bar-multi">
+             <ButtonToolbar>
+ 
+            <Button variant="success"  size="md">Search</Button>
+            
+            </ButtonToolbar>
+             </div> 
+              </div>
                <div className="Container"> 
                 <Row>
                     <Col  xl={3} md={4} lg={3}  ><Hidden xs sm>
@@ -405,47 +510,24 @@ class Jobs extends Component{
                     <div className="search-job-header">
                     <p>jobs in Pakistan <i class="fa fa-search" aria-hidden="true"></i> </p>
                     </div>
-                    <div className="job-post-area">
-                     <div className="post-header">
-                     <div className="post-logo">
-                     <img
-                    className="job-logo"
-                    src={require('../images/abc (2).jpg')}
-                    alt="Third slide"
-                    />
-                     </div>
-                     <div className="post-title">
-                     <p>Andriod Developer / Mobile App Developer<p><i class="fa fa-clock-o" aria-hidden="true"></i> 11:08PM 10 feb 2019</p></p>
+
+
+
+
+                     {jobs}
+
+                   
+
+
+
+
+
+
+
+
+
+
                     
-                     </div>
-                    
-                     </div>
-                     <div className="post-content">
-                     <div className="company-name">
-                      <p><i class="fa fa-institution" aria-hidden="true"></i> company : Concept International PVT LTD<span className="job-location"><i class="fa fa-map-marker" aria-hidden="true"></i> Lahore, Pakistan</span></p>
-                     </div>
-                     <div className="job-detail">
-                     We are looking for an Android Developer / Mobile App Developer Android Developer 
-                     required for different projects. Should have knowledge of current  We are looking for an Android Developer / Mobile App Developer Android Developer 
-                     required for different projects. Should have knowledge of current ...
-                     </div>
-                     <div className="job-features">
-                     <p><i class="fa fa-cc-visa" aria-hidden="true"></i> Rs.20K-30K salary</p>
-                     <p><i class="fa fa-mortar-board" aria-hidden="true"></i> Fresh Experiance</p>
-                     <p><i class="fa fa-flag" aria-hidden="true"></i> 4 total positions</p>  
-                     </div>
-                     <div className="job-requirement">
-                     <p><i class="fa fa-tags" aria-hidden="true"></i> Presentation skills</p>|
-                     <p>  communication skills</p>|
-                     <p>  time management</p>  
-                     </div>
-                     <div className="post-footer">
-                     <p><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 7 likes  </p>
-                     <p><i class="fa fa-comments" aria-hidden="true"></i> 5 comments  </p>
-                     <p><i class="fa fa-share-alt" aria-hidden="true"></i> 7 shares </p>
-                     </div>
-                     </div>
-                    </div>
                     <div className="job-post-area">
                      <div className="post-header">
                      <div className="post-logo">
@@ -703,10 +785,11 @@ class Jobs extends Component{
 
 
                     <Col xl={3} lg={3}  ><Hidden xs sm md>
-                    
+                   
                     <div className="top-job-header">
                     <p>Top jobs</p>
                     </div> 
+                    {topJobs}
                     <div className="top-job-post">
                     <div className="post-title">
                      <p>Senior IOS Developer / IOS Developer<p><i class="fa fa-clock-o" aria-hidden="true"></i> 10:08PM 18 feb 2019</p></p>
@@ -922,5 +1005,10 @@ class Jobs extends Component{
         );
     }
 }
-export default Jobs;
+const mapStateToProps = (state) => {
+    return {
+      jobs: state.userReducer
+    }
+  }
+export default connect(mapStateToProps)(Jobs);
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {MDBContainer,MDBBtn,MDBFormInline ,MDBIcon} from "mdbreact";
-import { Carousel} from 'react-bootstrap';
+
+import { Button,ButtonToolbar} from 'react-bootstrap';
 import Company from './companies';
 import Jobbrowsing from './browsing';
 import FeatureJob from './featurejob';
@@ -10,22 +10,23 @@ class Content extends Component{
         return(
             <div className="content">
              <img src={require('../images/kk.png')} className="content-image"/>
-            {'  '}
-             <div className="search_bar">
-
-        
-             <MDBContainer>
-             <MDBFormInline className="md-form mr-auto mb-4">
-            
-                <input  className="form-control mr-sm-3"  type="text" placeholder="What are you looking for?" aria-label="Search" />
-                
-                <input className="form-control mr-sm-3" type="text" placeholder="location" aria-label="Search" />
-                <MDBBtn outline color="success" rounded size="sm" type="submit" className="mr-auto">Search</MDBBtn>
-                
-               
-             </MDBFormInline>
-             </MDBContainer>
+           
+            <div className="search-bar1">
+             <div className="search-bar-multi">
+             <input type="text" placeholder="What are you you looking for?" />
+             </div> 
+             <div className="search-bar-multi">
+             <input type="text" placeholder="city..." />
              </div>
+            
+             <div className="search-bar-multi">
+             <ButtonToolbar>
+ 
+            <Button variant="success"  size="md">Search</Button>
+            
+            </ButtonToolbar>
+             </div> 
+              </div>
 
               <div className="jobBrowsinng">
             <p>Browse Jobs in Pakistan</p>

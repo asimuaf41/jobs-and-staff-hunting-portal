@@ -1,0 +1,18 @@
+.form-control{
+    background-color: #131c25;
+    color: white;
+    border: 1px solid #404549;
+}
+.form-control:focus{
+    background-color: #0e141a;
+    color: white;
+    
+    border: 1px solid white;
+}
+.modal-content{
+    background-image: url("../../images/jobee.jpg");
+ 
+  -webkit-box-shadow: 0 5px 10px rgb(53, 45, 45);
+  -moz-box-shadow: 0 5px 10px rgb(73, 48, 48);
+  box-shadow: 0 5px 10px rgb(37, 24, 24);
+}
